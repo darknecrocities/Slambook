@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Slambook</title>
+    <style>
+        /* Global Styles */
+        body {
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+            font-family: 'Helvetica Neue', sans-serif;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            background-attachment: fixed;
+            overflow-x: hidden;
+        }
+    
+        h2 {
+            text-align: center;
+            font-size: 3em;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+    
+        /* Parallax Background */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.pinimg.com/736x/99/60/df/9960df2240976d7bf3fa6282f12187cf.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            opacity: 0.2;
+            z-index: -1;
+        }
+    
+        /* Table Styles */
+        table {
+            width: 100%;
+            max-width: 800px;
+            margin: auto;
+            border-collapse: collapse;
+            border-radius: 15px;
+            overflow: hidden;
+            backdrop-filter: blur(15px);
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            animation: slideIn 1.5s ease-out;
+        }
+    
+        th, td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            transition: background-color 0.3s ease;
+        }
+    
+        th {
+            background: rgba(255, 111, 97, 0.8);
+            color: white;
+            font-size: 1.5em;
+            backdrop-filter: blur(5px);
+        }
+    
+        tr:nth-child(even) {
+            background-color: rgba(242, 242, 242, 0.5);
+        }
+    
+        td:nth-child(odd) {
+            background-color: rgba(211, 248, 226, 0.5);
+        }
+    
+        td:nth-child(even) {
+            background-color: rgba(255, 225, 168, 0.5);
+        }
+    
+        /* Hover Effect for Table Rows */
+        tr:hover {
+            background-color: rgba(255, 111, 97, 0.2);
+            transform: scale(1.02);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+    
+        /* Form Inputs */
+        input[type="text"], select {
+            width: 100%;
+            padding: 12px;
+            box-sizing: border-box;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            transition: border 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+        }
+    
+        input[type="text"]:hover, select:hover {
+            border: 2px solid #4caf50;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+            transform: scale(1.05);
+        }
+    
+        input[type="text"]:focus, select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+        }
+    
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+    
+        /* Buttons */
+        .buttons {
+            text-align: center;
+            padding: 30px;
+        }
+    
+        .buttons input {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(to right, #56ab2f, #a8e063);
+            color: white;
+            cursor: pointer;
+            margin-right: 15px;
+            transition: transform 0.3s ease, background-color 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.3);
+        }
+    
+        .buttons input:hover {
+            transform: scale(1.2);
+            background-color: #4caf50;
+            box-shadow: 0 12px 25px rgba(76, 175, 80, 0.5);
+        }
+    
+        .buttons input[type="reset"] {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+        }
+    
+        .buttons input[type="reset"]:hover {
+            background-color: #e53935;
+            box-shadow: 0 12px 25px rgba(229, 57, 53, 0.5);
+        }
+    
+        /* Image Styling */
+        .slambook-image {
+            display: block;
+            margin: 50px auto;
+            max-width: 90%;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+    
+        .slambook-image:hover {
+            transform: scale(1.05) rotate(-2deg);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+        }
+    
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    
+        @keyframes slideIn {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    
+        @keyframes fadeInUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    
+    </style>
+</head>
+<body>
+
+    <h2>Arron's Slambook</h2>
+    
+    <table>
+        <tr>
+            <th>Question</th>
+            <th>Answer</th>
+        </tr>
+        <tr>
+            <td>1. What is your full name?</td>
+            <td><input type="text" name="full_name" required></td>
+        </tr>
+        <tr>
+            <td>2. What is your favorite color?</td>
+            <td>
+                <select name="favorite_color">
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="other">Other</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>3. What is your favorite hobby?</td>
+            <td><input type="text" name="hobby" required></td>
+        </tr>
+        <tr>
+            <td>4. What is your favorite season?</td>
+            <td>
+                <input type="radio" name="season" value="spring" required>Spring
+                <input type="radio" name="season" value="summer" required>Summer
+                <input type="radio" name="season" value="autumn" required>Autumn
+                <input type="radio" name="season" value="winter" required>Winter
+            </td>
+        </tr>
+        <tr>
+            <td>5. Do you have any pets?</td>
+            <td>
+                <input type="checkbox" name="pets" value="dog">Dog
+                <input type="checkbox" name="pets" value="cat">Cat
+                <input type="checkbox" name="pets" value="bird">Bird
+                <input type="checkbox" name="pets" value="other">Other
+            </td>
+        </tr>
+        <tr>
+            <td>6. What is your dream vacation destination?</td>
+            <td><input type="text" name="vacation_destination" required></td>
+        </tr>
+        <tr>
+            <td>7. What is your favorite movie genre?</td>
+            <td>
+                <select name="movie_genre">
+                    <option value="action">Action</option>
+                    <option value="comedy">Comedy</option>
+                    <option value="drama">Drama</option>
+                    <option value="horror">Horror</option>
+                    <option value="sci-fi">Sci-Fi</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>8. What is your favorite food?</td>
+            <td><input type="text" name="favorite_food" required></td>
+        </tr>
+        <tr>
+            <td>9. What is your favorite book?</td>
+            <td><input type="text" name="favorite_book" required></td>
+        </tr>
+        <tr>
+            <td>10. What is your biggest goal in life?</td>
+            <td><input type="text" name="goal" required></td>
+        </tr>
+    </table>
+    
+    <div class="buttons">
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </div>
+
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj5rQoypBW7u4-sYSJIhW4dAxpUxeLVDFrGg&s" alt="Your Slambook Image" class="slambook-image">
+    <p>@2024 WEBCS Arron Kian Parejas Slambook's</p>
+
+</body>
+</html>
